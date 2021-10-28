@@ -1,0 +1,119 @@
+:root{
+    --fuenteHeadings: 'Palanquin', sans-serif;
+    --fuenteTexto: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --verde: #01a117;
+    --azul: rgb(2, 100, 192);
+}
+
+html {
+    font-size: 62.5%; /* Now 10rem = 1rem! */
+}
+
+/*Globales*/
+
+*{
+    font-family: var(--fuenteTexto);  
+    font-size: 1.5rem;  
+}
+
+h1, h2, h3{
+    font-family: var(--fuenteHeadings);
+}
+
+h1{
+    font-size: 6rem;
+}
+
+h2{
+    font-size: 5rem;
+}
+
+h2{
+    font-size: 3rem;
+}
+
+/*Utilidades*/
+.contenedor{
+    max-width: 100rem;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.mt-5{
+    margin-top: 5rem;
+}
+
+.mt-2{
+    margin-top: 2rem;
+}
+
+/*Botones*/
+
+.btn{
+    border-radius: 1.5rem;
+    padding: 0.6rem 2rem;
+    outline: none;
+    border: none;
+    color: white;
+}
+
+.btn.success{
+    background-color: var(--verde);
+}
+
+.btn:hover{
+    cursor: pointer;
+}
+
+/*Tabla*/
+.table {
+    border-collapse: collapse;
+    margin: 2.5rem 0;
+    min-width: 40rem;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+
+.table thead tr {
+    background-color: var(--azul);
+    color: #ffffff;
+    text-align: left;
+}
+
+.table th{
+    text-align: center;
+}
+
+.table th,
+.table td {
+    padding: 1.2rem 1.5rem;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+td.opciones{
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 600px) {
+    td.opciones{
+        justify-content: space-around;
+        flex-direction: row;    
+    }
+}

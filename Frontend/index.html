@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="normalize.css">
+        <link rel="stylesheet" href="styles.css">
+
+
+    </head>
+    <body>
+        <div class="contenedor">
+            <h2>Altas, bajas, consultas y cambios de usuarios</h2>
+
+            <button class="btn btn-success mt-3" id="btnAdd">
+                Crear nuevo usuario
+            </button>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre del diagrama</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>                
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Ventana Modal-->
+        <div id="modalNuevoUsuario" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <form method="POST" action="/CRUD_Usuarios/InsertarUsuario">
+                    <div class="campo">
+                        <label for="nombre">Nombre: </label>
+                        <input type="text" name="nombre" id="nombre">
+                    </div>
+
+                    <div class="campo">
+                        <label for="apPaterno">Apellido paterno: </label>
+                        <input type="text" name="apPaterno" id="apPaterno">
+                    </div>
+
+                    <div class="campo">
+                        <label for="apMaterno">Apellido materno: </label>
+                        <input type="text" name="apMaterno" id="apMaterno">
+                    </div>
+
+                    <div class="campo">
+                        <label for="password">Contraseña: </label>
+                        <input type="text" name="password" id="password">
+                    </div>
+                    
+                    <div class="campo">
+                        <button class="btn btn-success" type="submit">Guardar</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+
+        <script src="index.js"></script>
+    </body>
+</html>
