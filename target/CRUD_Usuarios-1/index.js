@@ -4,12 +4,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     modalNuevoUsuario();
     opciones();
     modalConsultarUsuario();
-<<<<<<< HEAD
-=======
     modalActualizaDatosUsuario();
-    
->>>>>>> 459dd8b (Update en proceso)
-    
+      
 });
 
 function llenarTabla () {
@@ -42,10 +38,8 @@ function llenarTabla () {
 
                 const modificarReg = document.createElement('button');
                 modificarReg.innerText = 'Modificar';
-<<<<<<< HEAD
-=======
                 modificarReg.setAttribute("id", "btnActualizar")
->>>>>>> 459dd8b (Update en proceso)
+
                 modificarReg.classList.add('opcion');
                 modificarReg.classList.add('opcion-modificar');                
 
@@ -67,8 +61,7 @@ function llenarTabla () {
         });
 }
 
-<<<<<<< HEAD
-=======
+
 function modalActualizaDatosUsuario(){
     // Get the modal
     var modal = document.getElementById("modalActualizaDatosUsuario");
@@ -97,7 +90,6 @@ function modalActualizaDatosUsuario(){
     }
 }
 
->>>>>>> 459dd8b (Update en proceso)
 function modalNuevoUsuario(){
     // Get the modal
     var modal = document.getElementById("modalNuevoUsuario");
@@ -203,8 +195,6 @@ function opciones (){
                     
                     modalContent.parentNode.style.display = "block";
                 });
-<<<<<<< HEAD
-=======
                 
         }else if(e.target.classList.contains('opcion-modificar')){
                 //Mostramos el modal
@@ -218,7 +208,6 @@ function opciones (){
                 });
                
                     
->>>>>>> 459dd8b (Update en proceso)
         }
     })
 }
