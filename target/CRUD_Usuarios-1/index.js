@@ -4,8 +4,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     modalNuevoUsuario();
     opciones();
     modalConsultarUsuario();
-    modalActualizaDatosUsuario();
-      
+    modalActualizaDatosUsuario();      
 });
 
 function llenarTabla () {
@@ -13,8 +12,7 @@ function llenarTabla () {
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(data => {
-            const usuarios = data.querySelectorAll('usuario');
-            console.log(usuarios);
+            const usuarios = data.querySelectorAll('usuario');usuarios
             
             //DOM Scripting
             usuarios.forEach( usuarioNode => {
@@ -64,28 +62,23 @@ function llenarTabla () {
 
 function modalActualizaDatosUsuario(){
     // Get the modal
-    var modal = document.getElementById("modalActualizaDatosUsuario");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("btnActualizar");
+    var modal = document.getElementById("modalActualizarUsuario");
+   
    
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
+    var span = document.getElementsByClassName("close")[2];
     
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
       modal.style.display = "none";
+      limpiarModal(modal);
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
         modal.style.display = "none";
+        limpiarModal(modal);
       }
     }
 }
@@ -116,6 +109,8 @@ function modalNuevoUsuario(){
         modal.style.display = "none";
       }
     }
+    
+
 }
 
 function modalConsultarUsuario(){
@@ -134,21 +129,26 @@ function modalConsultarUsuario(){
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
-        modal.style.display = "none";
         limpiarModal(modal);
+        modal.style.display = "none";
       }
     }
 }
 
+
 function limpiarModal(modal){
-    const contenedor = modal.querySelector('.modal-content .tabla-datos-usuario');
-    contenedor.parentNode.removeChild(contenedor);
+    const contenedor = modal.querySelector('.modal-content');
+    
+    contenedor.removeChild(contenedor.lastChild);
+
+
 }
 
 function opciones (){
+    
     window.addEventListener('click', function (e) {
         
-        //Consultar
+        //Dio click en consultar
         if(e.target.classList.contains('opcion-consultar')){
             //Obtenemos el id del usuario
             const id = e.target.parentNode.parentNode.dataset.id;
@@ -196,16 +196,79 @@ function opciones (){
                     modalContent.parentNode.style.display = "block";
                 });
                 
-        }else if(e.target.classList.contains('opcion-modificar')){
-                //Mostramos el modal
+        }else if(e.target.classList.contains('opcion-modificar')){ //Dio click en modificar
+                
                 const id = e.target.parentNode.parentNode.dataset.id;
                 //Hacemos la petición
-                fetch("/CRUD_Usuarios/Actualizar?id=" + id)
-                .then(response => response.text())
-                .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-                .then(data => {                    
-                    modalActualizaDatosUsuario();     
+                fetch("/CRUD_Usuarios/Consultar?id=" + id)
+                    .then(response => response.text())
+                    .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+                    .then(data => {
+
+                        let usuario = data.querySelector('usuario');
+
+                        let form = document.createElement('form');
+                        form.method = 'GET';
+                        form.action = '/CRUD_Usuarios/Actualizar';
+
+                        //Va a ir indicando el index de id, nombre, etc...
+                        ['ID', 'Nombre', 'Apellido paterno', 'Apellido materno'].forEach((titulo, index) => {
+
+                            let div = document.createElement('div');
+                            div.classList.add('campo');
+                            let label = document.createElement('label'); 
+                            let input = document.createElement('input');
+                            input.type = 'text';
+
+                            //label
+                            label.innerText = titulo;
+                            div.append(label);
+
+                            //input
+                            input.value = usuario.childNodes[index].innerHTML;
+
+                            switch(titulo){
+                                case 'ID':
+                                    input.name = 'id';
+                                    break;
+                                case 'Nombre':
+                                    input.name = 'nombre';
+                                    break;
+                                case 'Apellido paterno':
+                                    input.name = 'apPaterno';
+                                    break;
+                                case 'Apellido materno':
+                                    input.name = 'apMaterno';
+                                    break;
+                            }
+
+                            div.append(input);
+
+
+                            //Agregamos el div al form
+                            form.append(div);
+                        })
+
+                    //sumbit
+                    const submit = document.createElement('button');
+                    submit.classList.add('btn');
+                    submit.classList.add('btn-success');
+                    submit.type = 'submit';
+                    submit.innerHTML = 'Actualizar';
+                    
+                    //Agrego el submit al form
+                    form.append(submit);
+                    
+                    //Mostramos el modal
+                    let modalContent = document.querySelector('#modalActualizarUsuario .modal-content');
+                    modalContent.append(form);
+                    
+                    modalContent.parentNode.style.display = "block";
+                    
+
                 });
+                
+                
                
                     
         }
