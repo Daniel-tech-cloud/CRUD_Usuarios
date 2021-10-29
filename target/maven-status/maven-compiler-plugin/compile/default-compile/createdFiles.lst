@@ -1,3 +1,6 @@
-Servlets_CRUD\Consultar.class
 Servlets_CRUD\ConexionBD.class
 Servlets_CRUD\Insertar.class
+Servlets_CRUD\Actualizar.class
+Servlets_CRUD\Eliminar.class
+Servlets_CRUD\InsertarUsuario.class
+Servlets_CRUD\Consultar.class
